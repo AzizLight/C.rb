@@ -127,7 +127,7 @@ else
   when "help"
     puts "C.rb -- Time keeping script. \nCall with no params to clock in/out" 
     puts "Params:\n"
-    puts "\t?       : are you clocked in? check. Optional 'color' argument"
+    puts "\t??      : are you clocked in? check. Optional 'color' argument"
     puts "\tlog     : peek at the work log"
     puts "\ttotal   : how long have you worked? (hours)"
     puts "\t          optional \" at rate <n>\" displays billable"
