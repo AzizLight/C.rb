@@ -137,7 +137,7 @@ else
     puts "\tclear   : empties the log file "
     puts "\nBeta:\n"
     puts "\tinvoice at rate <n> : Makes a rudementary invoice at rate <n>"
-  when "?"
+  when "??"
     if ARGV[1] == "color"
       puts "#{clocked_in ? "\e[1;32m" : "\e[1;31m"}#{total(log)} hrs\e[0m"
     else
