@@ -3,7 +3,7 @@
 # Created by Artem Titoulenko (artem.titoulenko@gmail.com)
 # clock in application. I'm tired of counting.
 
-# C.rb -- Time keeping script. 
+# C.rb -- Time keeping script.
 # Call with no params to clock in/out
 # Params:
 #   ?       : are you clocked in? check. Optional 'color' argument
@@ -13,8 +13,8 @@
 #             ex: c total at rate 25 #=> $539.53
 #             sum for project at rate n
 #   update  : update the app, optional 'force' argument
-#   clear   : empties the log file 
-# 
+#   clear   : empties the log file
+#
 # Beta:
 #   invoice at rate <n> : Makes a rudementary invoice at rate <n>
 
@@ -37,7 +37,7 @@ File.open(path,"r") do |file|
     log << $1.to_f if work != nil
   end
   clocked_in = log.size % 2 != 0
-end 
+end
 
 # sorta beta? I don't know how well this will work but it's interesting
 def update_self
@@ -49,7 +49,7 @@ end
 
 def show_log(log)
   k = true
-  log.each do |x| 
+  log.each do |x|
     puts "#{Time.at(x)} #{k ? "in" : "out"}"
     puts "\n" if !k; k = !k
   end
@@ -70,11 +70,11 @@ def total(log)
       end
       second = !second
     end
-    
+
     if log.size % 2 != 0
       worked += Time.now - Time.at(log.last)
     end
-    
+
     return (worked / 3600).to_decimal_places(3).to_f
   end
 end
@@ -106,7 +106,7 @@ else
       log << Time.now if log.size % 2 != 0 #we can't just ask for $ when clocked in
       show_log(log)
       puts "-"*40
-      puts "#{total(log)} hours * $#{nice_rate}/hr = $#{total(log) * nice_rate}"  
+      puts "#{total(log)} hours * $#{nice_rate}/hr = $#{total(log) * nice_rate}"
     end
   when "version"
     puts (File.read(__FILE__)).match(/# Version \((.*?)\)/)[1].to_f
@@ -115,7 +115,7 @@ else
     available_version = k.match(/# Version \((.*?)\)/)[1].to_f
     current_version = (File.read(__FILE__)).match(/# Version \((.*?)\)/)[1].to_f
     if available_version > current_version
-      puts "version #{available_version} available, updating" 
+      puts "version #{available_version} available, updating"
       update_self
     else
       if !ARGV.empty? and ARGV[1] == "force"
@@ -125,7 +125,7 @@ else
       end
     end
   when "help"
-    puts "C.rb -- Time keeping script. \nCall with no params to clock in/out" 
+    puts "C.rb -- Time keeping script. \nCall with no params to clock in/out"
     puts "Params:\n"
     puts "\t??      : are you clocked in? check. Optional 'color' argument"
     puts "\tlog     : peek at the work log"
@@ -145,9 +145,9 @@ else
     end
   when "log"
     show_log(log)
-  when "total"    
+  when "total"
     if ARGV[1] == "at" and ARGV[2] == "rate" and ARGV[3].to_f >= 0 and ARGV[3] != nil
-      puts "$#{total(log).to_decimal_places(2) * ARGV[3].to_f}"  
+      puts "$#{total(log).to_decimal_places(2) * ARGV[3].to_f}"
     else
       puts "#{total(log)} hours"
     end
